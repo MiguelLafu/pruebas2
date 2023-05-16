@@ -83,11 +83,58 @@ variable "resource_group_location" {
   }
 
 #3.- vm.tf
+  # Create storage account for boot diagnostics
+    variable "account_tier" {
+      type = string
+    }
+    variable "account_replication_type" {
+      type = string
+    }
+  # Create virtual machine
+    variable "admin_username" {
+      type = string
+    }
+    variable "size" {
+      type = string
+    }
+      #os_disk
+        variable "name_os" {
+          type = string
+        }
+        variable "caching" {
+          type = string
+        }
+        variable "storage_account_type" {
+          type = string
+        }
+      #source_image_reference
+        variable "publisher_os" {
+          type = string
+        }
+        variable "offer" {
+          type = string
+        }
+        variable "sku" {
+          type = string
+        }
+      # variable "version_si" {}
 
+  # Install IIS web server to the virtual machine
+    variable "publisher" {
+      type = string
+    }
+    variable "type" {
+      type = string      
+    }
+    variable "type_handler_version" {
+      type = string
+    }
+    variable "auto_upgrade_minor_version" {
+      type = bool
+    }
 
 #4.- random_name.tf
 variable "prefix" {
     type        = string
-
     description = "Prefix of the resource name"
 }

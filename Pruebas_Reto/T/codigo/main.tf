@@ -36,6 +36,29 @@ resource_group_location       = var.resource_group_location
     name_config                           = var.name_config
     private_ip_address_allocation_config  = var.private_ip_address_allocation_config
 
+#3.- vm.tf
+  # Create storage account for boot diagnostics
+  account_tier             = var.account_tier
+  account_replication_type = var.account_replication_type
+  # Create virtual machine
+  admin_username = var.admin_username
+  size = var.size
+      #os_disk
+        name_os               = var.name_os
+        caching               = var.caching
+        storage_account_type  = var.storage_account_type
+      #source_image_reference
+        publisher_os            = var.publisher_os
+        offer                 = var.offer
+        sku                   = var.sku
+
+  # Install IIS web server to the virtual machine
+  publisher                     = var.publisher
+  type                          = var.type
+  type_handler_version          = var.type_handler_version
+  auto_upgrade_minor_version    = var.auto_upgrade_minor_version
+
+
 #4.- random_name.tf
 prefix = var.prefix
 }
