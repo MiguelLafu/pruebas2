@@ -1,34 +1,34 @@
 # Create virtual network
 
 resource "azurerm_virtual_network" "my_terraform_network" {
-  name                 = "${random_pet.prefix.id}-vnet"
-  address_space        = [var.address_space]
-  location             = azurerm_resource_group.rg.location
-  resource_group_name  = azurerm_resource_group.rg.name
+  name                      = "${random_pet.prefix.id}-vnet"
+  address_space             = [var.address_space]
+  location                  = azurerm_resource_group.rg.location
+  resource_group_name       = azurerm_resource_group.rg.name
 }
 
 # Create subnet
 
-resource "azurerm_subnet" "my_terraform_nsubnet" {
-  name                 = "${random_pet.prefix.id}-subnet"
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.my_terraform_network
-  address_prefixes     = [var.address_prefixes] 
+resource "azurerm_subnet" "my_terraform_subnet" {
+  name                       = "${random_pet.prefix.id}-subnet"
+  resource_group_name        = azurerm_resource_group.rg.name
+  virtual_network_name       = azurerm_virtual_network.my_terraform_network
+  address_prefixes           = [var.address_prefixes] 
 }
 
 # Create public IPs
 
 resource "azurerm_public_ip" "my_terraform_public_ip" {
-  name                = "${random_pet.prefix.id}-nsg"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  allocation_method   = var.allocation_method
+  name                       = "${random_pet.prefix.id}-nsg"
+  location                   = azurerm_resource_group.rg.location
+  resource_group_name        = azurerm_resource_group.rg.name
+  allocation_method          = var.allocation_method
 }
 # Create Network Security Group and rules
 resource "azurerm_network_security_group" "my_terraform_nsg" {
-  name                = "${random_pet.prefix.id}-nsg"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  name                        = "${random_pet.prefix.id}-nsg"
+  location                    = azurerm_resource_group.rg.location
+  resource_group_name         = azurerm_resource_group.rg.name
 
   security_rule {
     name                       = var.name_RDP
@@ -55,3 +55,15 @@ resource "azurerm_network_security_group" "my_terraform_nsg" {
   }
 }
 # Create network interface
+resourresource "azurerm_network_interface" "my_terraform_nic" {
+  name                          = "${random_pet.prefix.id}-nic"
+  location                      = azurerm_resource_group.rg.location
+  resource_group_name           = azurerm_resource_group.rg.name
+
+    ip_configuration {
+      name                          = var.name_config
+      subnet_id                     = azurerm_subnet.my_terraform_subnet.id
+      private_ip_address_allocation = var.private_ip_address_allocation_config
+      public_ip_address_id          = azurerm_public_ip.my_terraform_public_ip.id
+    }
+}

@@ -30,6 +30,9 @@ resource_group_location = "eastus"
         destination_port_range_WEB     = "80"
         source_address_prefix_WEB      = "*"
         destination_address_prefix_WEB = "*"
+# Create network interface
+    name_config                          = "my_nic_configuration"
+    private_ip_address_allocation_config = "Dynamic"
 
 
 #4.- random_name.tf

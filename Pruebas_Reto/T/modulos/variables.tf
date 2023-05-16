@@ -4,17 +4,19 @@ variable "resource_group_location" {
 }
 
 #2.- network.tf
-variable "address_space" {
+  # Create virtual network
+  variable "address_space" {
+      type       = string
+  }
+  # Create subnet
+  variable "address_prefixes" {
     type = string
-
-}
-variable "address_prefixes" {
-  type = string
-}
-variable "allocation_method" {
-  type = string
-}
-
+  }
+  # Create public IPs
+  variable "allocation_method" {
+    type = string
+  }
+  # Create Network Security Group and rules
     #security_rule1
       variable "name_RDP" {
         type = string
@@ -72,6 +74,13 @@ variable "allocation_method" {
       variable "destination_address_prefix_WEB" {
         type = string
       }
+  # Create network interface
+  variable "name_config" {
+    type = string
+  }
+  variable "private_ip_address_allocation_config" {
+    type = string
+  }
 
 
 #4.- random_name.tf
