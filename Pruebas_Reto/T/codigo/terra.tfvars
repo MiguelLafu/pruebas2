@@ -34,6 +34,7 @@ resource_group_location = "eastus"
     name_config                          = "my_nic_configuration"
     private_ip_address_allocation_config = "Dynamic"
 
+#3.- vm.tf
 
 #4.- random_name.tf
     prefix                  = "win-vm-iss"

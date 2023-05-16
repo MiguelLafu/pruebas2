@@ -82,6 +82,8 @@ variable "resource_group_location" {
     type = string
   }
 
+#3.- vm.tf
+
 
 #4.- random_name.tf
 variable "prefix" {
