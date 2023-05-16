@@ -45,6 +45,9 @@ resource "azurerm_virtual_machine_extension" "web_server_install" {
   type_handler_version          = var.type_handler_version
   auto_upgrade_minor_version    = var.auto_upgrade_minor_version
 
-
-
+settings = <<SETTINGS
+    {
+        "commandToExecute": "powershell -ExecutionPolicy Unrestricted Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature -IncludeManagementTools"
+    }
+SETTINGS
 }
