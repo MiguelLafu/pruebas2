@@ -55,7 +55,7 @@ resource "azurerm_network_security_group" "my_terraform_nsg" {
   }
 }
 # Create network interface
-resourresource "azurerm_network_interface" "my_terraform_nic" {
+resource "azurerm_network_interface" "my_terraform_nic" {
   name                          = "${random_pet.prefix.id}-nic"
   location                      = azurerm_resource_group.rg.location
   resource_group_name           = azurerm_resource_group.rg.name
