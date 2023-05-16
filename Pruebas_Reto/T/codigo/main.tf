@@ -1,54 +1,38 @@
-module "resource_group" {
-  source = "../modulos/01.-resource_group"
+module "modulos" {
+  source = "../modulos"
 
-  name = "${var.name}-rg"
-  location = var.location
-}
+resource_group_location       = var.resource_group_location
 
-module "network" {
-  source = "../modulos/02.-network"
+#2.- network.tf
+  # Create virtual network
+    address_space               = var.address_space
+  # Create subnet
+    address_prefixes            = var.address_prefixes 
+  # Create public IPs
+    allocation_method           = var.allocation_method  
+  # Create Network Security Group and rules
+    #security_rule1
+    name_RDP                        = var.name_RDP
+    priority_RDP                    = var.priority_RDP
+    direction_RDP                   = var.direction_RDP
+    access_RDP                      = var.access_RDP
+    protocol_RDP                    = var.protocol_RDP
+    source_port_range_RDP           = var.source_port_range_RDP
+    destination_port_range_RDP      = var.destination_port_range_RDP
+    source_address_prefix_RDP       = var.source_address_prefix_RDP
+    destination_address_prefix_RDP  = var.destination_address_prefix_RDP
 
-  name_vnet = "${var.name_vnet}-1"
-  address_space_vnet = var.address_vnet
-  location_vnet = var.location
-  resource_group_name_vnet = "${var.name}-vnet"
+    #security_rule2
+    name_WEB                        = var.name_WEB
+    priority_WEB                    = var.priority_WEB
+    direction_WEB                   = var.direction_WEB
+    access_WEB                      = var.access_WEB
+    protocol_WEB                    = var.protocol_WEB
+    source_port_range_WEB           = var.source_port_range_WEB
+    destination_port_range_WEB      = var.destination_port_range_WEB
+    source_address_prefix_WEB       = var.source_address_prefix_WEB
+    destination_address_prefix_WEB  = var.destination_address_prefix_WEB
 
-  address_prefixes = var.address_prefixes
-  name_subnet = "${var.name_subnet}-1"
-  resource_group_name_subnet = "${var.name}-subnet"
-  virtual_network_name = var.virtual_network_name
-
-  allocation_method_ip = var.allocation_method_ip
-  location_ip = var.location
-  resource_group_name_ip = "${var.name}-ip"
-  name_ip = "${var.name_ip}-1"
-
-  location_sg = var.location
-  name_sg = "${var.name_sg}-1"
-  resource_group_name_sg = "${var.name}-sg"
-
-  location_net_int = var.location
-  name_net_int = "${var.name_net_int}-1"
-  resource_group_name_net_int = "${var.name}-net_int"
-
-  /*
-  name_ip_net_int = var.name_ip_net_int
-  subnet_id_net_int = var.subnet_id_net_int
-  private_ip_address_allocation_net_int = var.private_ip_address_allocation_net_int
-  public_ip_address_id_net_int = var.public_ip_address_id_net_int
-
-
-  network_interface_id = var.network_interface_id
-  network_security_group_id = var.network_security_group_id */
-}
-
-module "VM" {
-  source = "../modulos/03.-VM"
-  
-    name_vm                     = "diag${var.name}"
-    location_vm                 = var.location
-    resource_group_name_vm      = var.resource_group_name
-    account_tier_vm             = var.account_tier
-    account_replication_type_vm = var.account_replication_type
-
+#4.- random_name.tf
+prefix = var.prefix
 }

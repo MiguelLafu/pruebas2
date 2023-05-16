@@ -1,88 +1,84 @@
-variable "location" {
-  default = "eastus"
-  description = "Location of the resource group."
+variable "resource_group_location" {
+    description = "Location of the resource group."
+
 }
 
-variable "name" {
-  type = string
-}
+#2.- network.tf
+  variable "address_space" {
+      type       = string
+
+  }
+  variable "address_prefixes" {
+    type = string
+  }
+  variable "allocation_method" {
+    type = string
+  }
+
+    #security_rule1
+      variable "name_RDP" {
+        type = string
+      }
+      variable "priority_RDP" {
+        type = number
+      }
+      variable "direction_RDP" {
+        type = string
+      }
+      variable "access_RDP" {
+        type = string
+      }
+      variable "protocol_RDP" {
+        type = string
+      }
+      variable "source_port_range_RDP" {
+        type = string
+      }
+      variable "destination_port_range_RDP" {
+        type = string
+      }
+      variable "source_address_prefix_RDP" {
+        type = string
+      }
+      variable "destination_address_prefix_RDP" {
+        type = string
+      }
+
+    #security_rule2
+      variable "name_WEB" {
+        type = string
+      }
+      variable "priority_WEB" {
+        type = number
+      }
+      variable "direction_WEB" {
+        type = string
+      }
+      variable "access_WEB" {
+        type = string
+      }
+      variable "protocol_WEB" {
+        type = string
+      }
+      variable "source_port_range_WEB" {
+        type = string
+      }
+      variable "destination_port_range_WEB" {
+        type = string
+      }
+      variable "source_address_prefix_WEB" {
+        type = string
+      }
+      variable "destination_address_prefix_WEB" {
+        type = string
+      }
 
 
-variable "address_vnet" {
-  type = list(string)
-}
+      
 
-variable "name_vnet" {
-  type = string
-}
+#4.- random_name.tf
+  variable "prefix" {
+      type        = string
 
-variable "name_subnet" {
-  type = string
-}
-
-variable "address_prefixes" {
-  type = list(string)
-}
-
-variable "virtual_network_name" {
-  type = string
-}
-
-variable "allocation_method_ip" {
-  type = string
-}
-
-variable "name_ip" {
-  type = string
-}
-
-variable "name_sg" {
-  type = string
-}
-
-variable "name_net_int" {
-  type = string
-}
-/*
-variable "name_ip_net_int" {
-  type = string
-}
-
-variable "private_ip_address_allocation_net_int" {
-  type = string
-}
-
-variable "public_ip_address_id_net_int" {
-  type = string
-}
-
-variable "subnet_id_net_int" {
-  type = string
-}
-
-variable "network_interface_id" {
-  type = string
-}
-
-variable "network_security_group_id" {
-  type = string
-}*/
-variable "name_vm" {
-  type = string
-}
-variable "location_vm" {
-  type = string
-}
-variable "resource_group_name" {
-  type = string
-}
-
-variable "resource_group_name_vm" {
-  type = string
-}
-variable "account_tier_vm" {
-  type = string
-}
-variable "account_replication_type_vm" {
-  type = string
-}
+      description = "Prefix of the resource name"
+  }
