@@ -1,9 +1,13 @@
-module "modulos" {
-  source = "../modulos"
+module "resource_group" {
+  source = "../modulos/1.-resouce_group"
+  resource_group_location       = var.resource_group_location
+  
+  }
 
-resource_group_location       = var.resource_group_location
+module "network" {
+  source = "../modulos/2.-network"
 
-#2.- network.tf
+  #2.- network.tf
   # Create virtual network
     address_space               = var.address_space
   # Create subnet
@@ -35,8 +39,12 @@ resource_group_location       = var.resource_group_location
   # Create network interface
     name_config                           = var.name_config
     private_ip_address_allocation_config  = var.private_ip_address_allocation_config
+}
 
-#3.- vm.tf
+module "vm" {
+  source = "../modulos/3.-vm"
+  
+  #3.- vm.tf
   # Create storage account for boot diagnostics
   account_tier             = var.account_tier
   account_replication_type = var.account_replication_type
@@ -57,8 +65,10 @@ resource_group_location       = var.resource_group_location
   type                          = var.type
   type_handler_version          = var.type_handler_version
   auto_upgrade_minor_version    = var.auto_upgrade_minor_version
+}
 
-
-#4.- random_name.tf
-prefix = var.prefix
+module "random_name" {
+  source = "../modulos/4.-random_name"
+  #4.- random_name.tf
+  prefix = var.prefix
 }
